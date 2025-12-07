@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 class User(BaseModel):
   """
@@ -20,3 +20,16 @@ class User(BaseModel):
   last_name: str
   hashed_password: str
   salt: str
+
+class CreateUser(BaseModel):
+  """
+  JSON type received from the frontend for creating new user
+  """
+  first_name: str = Field(alias="firstName")
+  last_name: str = Field(alias="lastName")
+  email: str
+  password: str
+
+  model_config = {
+    "populate_by_name": True # can use python's field or alias
+  }
