@@ -33,3 +33,10 @@ class CreateUser(BaseModel):
   model_config = {
     "populate_by_name": True # can use python's field or alias
   }
+
+class LoginUser(BaseModel):
+  """
+  JSON type received from the frontend for logging in user
+  """
+  email: str
+  password: str
