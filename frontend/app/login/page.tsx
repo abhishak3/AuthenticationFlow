@@ -34,7 +34,7 @@ export default function Page() {
 
     setStatus('loading');
 
-    fetch(`${API_URL}/login`, {
+    fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -35,7 +35,7 @@ export default function Page() {
 
     setStatus('loading');
 
-    fetch(`${API_URL}/signup`, {
+    fetch(`${API_URL}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,8 +10,7 @@ class User(BaseModel):
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50),
     Email VARCHAR(100),
-    HashedPassword VARCHAR(255),
-    Salt VARCHAR(10)
+    HashedPassword VARCHAR(255)
   );
   ```
   """
@@ -19,7 +18,6 @@ class User(BaseModel):
   first_name: str
   last_name: str
   hashed_password: str
-  salt: str
 
 class CreateUser(BaseModel):
   """
