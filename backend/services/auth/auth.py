@@ -29,8 +29,9 @@ class AuthService:
     )
 
   def login(self, user: LoginUser):
-    # check if user exists through email
     current_user = self.repo.get_user_by_email(user.email)
+
+    # check if user exists through email
     if not current_user:
       raise UserNotFound()
     
@@ -38,3 +39,5 @@ class AuthService:
     is_authenticated = bcrypt.checkpw(user.password.encode(), current_user.hashed_password.encode())
     if not is_authenticated:
       raise InvalidLogin()
+    
+    return current_user
