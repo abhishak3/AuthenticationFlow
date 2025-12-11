@@ -20,15 +20,29 @@ def generate_access_token(data: dict):
   # https://pyjwt.readthedocs.io/en/stable/usage.html#registered-claim-names
   to_encode["exp"] = expire
 
-  encoded_jwt = jwt.encode(
+  return jwt.encode(
     to_encode,
     settings.JWT_SECRET,
     algorithm=settings.JWT_ALGORITHM,
   )
 
-  return encoded_jwt
+def generate_refresh_token(data: dict):
+  to_encode = data.copy()
 
-def decode_access_token(token: str) -> dict:
+  # adding expiration time
+  expire = (datetime.now(timezone.utc)
+        + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS))
+  
+  to_encode["exp"] = expire
+  to_encode["type"] = "refresh"
+
+  return jwt.encode(
+    to_encode,
+    settings.JWT_SECRET,
+    algorithm=settings.JWT_ALGORITHM,
+  )
+
+def decode_token(token: str) -> dict:
   return jwt.decode(
     token,
     settings.JWT_SECRET,
